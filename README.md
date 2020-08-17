@@ -1,0 +1,3 @@
+# vimconfigs
+This are my vimconfigs...
+Currently I use neovim because of better Plugins (?)
