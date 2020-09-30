@@ -116,7 +116,9 @@ nnoremap <Enter> o<ESC>
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
 
-inoremap <C-DEL> X<Esc>dwi
+"deleting word right of the curser
+"inoremap <C-Del> X<Esc>dwi      old version just for documentation
+inoremap <C-DEL> <C-Right> <C-w>
 nnoremap <C-DEL> ce
 
 "mapping to get at end of line in insert mode
