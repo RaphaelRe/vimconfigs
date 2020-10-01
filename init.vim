@@ -14,12 +14,13 @@ set smartcase
 set title
 set history=9999
 set colorcolumn=80
+"let &colorcolumn=join(range(81,999),",")
 set wildmenu
 set mouse=a
 set ve+=onemore
 colo peachpuff
 highlight Normal ctermbg=236
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=237 guibg=lightgrey
 highlight CursorColumn ctermbg=0 guibg=lightgrey
 highlight Visual ctermbg=0 guibg=lightgrey
 
@@ -102,36 +103,35 @@ let g:move_key_modifier = 'C'
 "check code dynamically - is kind of annoying
 "call neomake#configure#automake('nrwi', 500)
 
+" using ipython as python interpreter
 let cmdline_app           = {}
 let cmdline_app['python']   = 'ipython'
-
-
 
 
 
 " other keybindings
 nnoremap <leader>N :NERDTree<cr>
 nnoremap <Enter> o<ESC>
-"inoremap <C-BS> <C-w>
-noremap! <C-BS> <C-w>
-noremap! <C-h> <C-w>
 
 "deleting word right of the curser
 "inoremap <C-Del> X<Esc>dwi      old version just for documentation
 inoremap <C-DEL> <C-Right> <C-w>
 nnoremap <C-DEL> ce
 
+
 "mapping to get at end of line in insert mode
 inoremap <C-e> <Esc>$a
 
 
+"mapping to get at beginging of line in insert mode
+inoremap <C-a> <Esc>0i
 
 "set coding style
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=80 | 
+"    \ set textwidth=80 | 
     \ set expandtab|
     \ set autoindent|
     \ set fileformat=unix
