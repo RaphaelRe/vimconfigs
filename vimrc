@@ -116,3 +116,12 @@ au BufNewFile,BufRead *.js, *.html, *.css
     \ set shiftwidth=2 
 
 
+
+
+"faster scroling
+nnoremap <S-j> 10j
+nnoremap <S-k> 10k
+
+vnoremap <S-j> 10j
+vnoremap <S-k> 10k
+

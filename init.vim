@@ -100,12 +100,16 @@ let cmdline_term_width= 80
 "set move sippets on ctrl
 let g:move_key_modifier = 'C'
 
+
 "check code dynamically - is kind of annoying
 "call neomake#configure#automake('nrwi', 500)
 
 " using ipython as python interpreter
 let cmdline_app           = {}
 let cmdline_app['python']   = 'ipython'
+
+
+let NERDTreeMapOpenInTab='<ENTER>'
 
 
 
@@ -115,16 +119,40 @@ nnoremap <Enter> o<ESC>
 
 "deleting word right of the curser
 "inoremap <C-Del> X<Esc>dwi      old version just for documentation
-inoremap <C-DEL> <C-Right> <C-w>
-nnoremap <C-DEL> ce
+"inoremap <C-DEL> <C-Right> <C-w>
+inoremap <C-DEL> <C-o>dw
+"inoremap <C-DEL> <C-o>de
+"nnoremap <C-DEL> ce
+
+
+"unhighlight
+nnoremap <F3> :noh <ENTER>
 
 
 "mapping to get at end of line in insert mode
 inoremap <C-e> <Esc>$a
-
-
 "mapping to get at beginging of line in insert mode
 inoremap <C-a> <Esc>0i
+
+
+" mapping for jumping to the end of the word in insert mode instead of
+" begining of the next word
+"inoremap <C-Right> <Esc>ea
+
+
+"faster scroling
+nnoremap <S-j> 10j
+nnoremap <S-k> 10k
+
+vnoremap <S-j> 10j
+vnoremap <S-k> 10k
+
+
+
+nnoremap + :vertical resize +5<CR>
+nnoremap - :vertical resize -5<CR>
+
+
 
 "set coding style
 au BufNewFile,BufRead *.py
