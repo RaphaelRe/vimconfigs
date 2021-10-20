@@ -1,3 +1,3 @@
 # vimconfigs
 This are my vimconfigs...
-Currently I use neovim because of better Plugins (?)
+Currently I use neovim because of async code completion
