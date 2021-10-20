@@ -18,7 +18,7 @@ set colorcolumn=80
 set wildmenu
 set mouse=a
 set ve+=onemore
-colo peachpuff
+"colo peachpuff
 highlight Normal ctermbg=236
 highlight ColorColumn ctermbg=237 guibg=lightgrey
 highlight CursorColumn ctermbg=0 guibg=lightgrey
@@ -30,12 +30,18 @@ autocmd FileType python nnoremap <buffer> <F9> :exec '!clear;python3' shellescap
 
 
 
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+
+"colorscheme
+Plug 'junegunn/seoul256.vim'
+
 "code completion
-Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 
 "nice statusline (use powerline insead?)
 Plug 'vim-airline/vim-airline'
@@ -64,32 +70,83 @@ Plug 'matze/vim-move'
 "comment plugin
 Plug 'preservim/nerdcommenter'
 
+" julia plugin
+Plug 'JuliaEditorSupport/julia-vim'
+
+"git plugin
+Plug 'tpope/vim-fugitive'
+
 
 "additional plugin if I eventually use vim for R
-"jalvesaq/Nvim-R
+Plug 'jalvesaq/Nvim-R'
 
+"plugin to handle csv data
+Plug 'chrisbra/csv.vim'
 
 
 call plug#end()
 
 
 
-"minimal settings for autocompletion - check :h deoplete-options
-let g:deoplete#enable_at_startup = 1
+""""""""""""""""auto completion and documentation""""""""""""""""""""""""""
+" deoplete autocompletion is faster since it uses async loading
+" jedi vim is not so fast but pops description directly
+" currently I use jedi vim for documentation on crtl d and other stuff on
+" standard bings and deoplete for autocompletion
 
-"set python linter
-let g:neomake_python_enabled_makers = ['pylint']
+let g:deoplete#enable_at_startup = 1 " Enabled
 
+" completions via jedi
+let g:jedi#completions_enabled = 0 "Disabled
 
-"airline theme
-let g:airline_theme='sol' 
-
-"disables jedi autocompletion because its slow
-let g:jedi#completions_enabled = 0  
+" disabled signatures since this makes nvim freez for short (or long) time
+" which can be really annoying
+let g:jedi#show_call_signatures = 0
 
 "documentation on ctrl d
 let g:jedi#documentation_command = "<C-d>"  
 
+
+""""""""""""""""set colorscheme""""""""""""""""""""""""""
+colorscheme seoul256
+"let g:seoul256_background = 233
+let g:seoul256_background = 237
+set background=dark
+
+
+
+"""""""""""""""" linter """"""""""""""""""""""""""
+"set python linter
+let g:neomake_python_enabled_makers = ['pylint']
+
+
+"""""""""""""" ariline confiurations """"""""""""""""""""""""""
+"airline theme
+"let g:airline_theme='sol' 
+"let g:airline_theme='jellybeans' 
+"let g:airline_theme='base16' 
+let g:airline_theme='papercolor' 
+
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+
+
+
+
+""""""""""""""""""""configs for sending code to terminal """"""""""""""""""""
 "opens interpreter in new console
 "let cmdline_external_term_cmd = "konsole -e '%s' &" 
 
@@ -97,8 +154,9 @@ let g:jedi#documentation_command = "<C-d>"
 let cmdline_vsplit = 1
 let cmdline_term_width= 80
 
-"set move sippets on ctrl
+"set move snippets on ctrl
 let g:move_key_modifier = 'C'
+
 
 
 "check code dynamically - is kind of annoying
@@ -107,14 +165,24 @@ let g:move_key_modifier = 'C'
 " using ipython as python interpreter
 let cmdline_app           = {}
 let cmdline_app['python']   = 'ipython'
+let cmdline_app['julia']   = 'julia'
+" I dont know why - but sometimes .jl is interpreted as lisp oO - I never use
+" lisp so I am fine
+let cmdline_app['lisp']   = 'julia'
 
 
+
+
+
+""""""""""""""""""""""keymap nerd tree""""""""""""""""""""""
 let NERDTreeMapOpenInTab='<ENTER>'
+
+nnoremap <leader>N :NERDTree<cr>
+
 
 
 
 " other keybindings
-nnoremap <leader>N :NERDTree<cr>
 nnoremap <Enter> o<ESC>
 
 "deleting word right of the curser
@@ -172,4 +240,9 @@ au BufNewFile,BufRead *.js, *.html, *.css
 " remap global copy to ctrl-c
 vnoremap <C-c> "+y
 vnoremap <C-x> "+yx
+
+
+" command to open terminal in new tab WHY DOES THIS NOT WORK
+command! Ter :tabnew | :ter 
+
 

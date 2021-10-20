@@ -3,6 +3,8 @@ filetype on
 set number
 set ruler
 set cursorcolumn
+" colo peachpuff
+"colo seoul256
 set cursorline
 set clipboard=unnamed
 syntax enable
@@ -17,7 +19,6 @@ set history=5000
 set colorcolumn=80
 set wildmenu
 set mouse=a
-colo peachpuff
 highlight Normal ctermbg=236
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 highlight CursorColumn ctermbg=0 guibg=lightgrey
@@ -44,6 +45,8 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'matze/vim-move'
+Plugin 'chrisbra/csv.vim'
+
 
 " alternative to jedi: not that good but faster(?)
 "Bundle 'Valloric/YouCompleteMe'
@@ -67,8 +70,8 @@ let g:jedi#documentation_command = "<C-d>"  " documentation
 let g:jedi#goto_stubs_command = ""  " no need
 
 " for color scheme
-let g:seoul256_background = 233
-"colo seoul256
+let g:seoul256_background = 238
+""colo seoul256
 
 
 
@@ -124,4 +127,8 @@ nnoremap <S-k> 10k
 
 vnoremap <S-j> 10j
 vnoremap <S-k> 10k
+
+
+command! Ter :tabnew | :ter 
+
 
